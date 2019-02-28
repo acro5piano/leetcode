@@ -92,6 +92,10 @@ class BSTNode {
       }
     }
   }
+
+  enumerate() {
+    this.value
+  }
 }
 
 class BST {
@@ -112,6 +116,10 @@ class BST {
   delete(value: number) {
     return this.rootNode.delete(value)
   }
+
+  enumerate() {
+    return this.rootNode.enumerate()
+  }
 }
 
 const bst = new BST(8)
@@ -124,6 +132,8 @@ bst.push(4)
 bst.push(7)
 bst.push(13)
 bst.push(9)
+bst.push(0)
+bst.push(2)
 
 console.log(JSON.stringify(bst, undefined, 4))
 
