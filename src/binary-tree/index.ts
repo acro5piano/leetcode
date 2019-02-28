@@ -9,6 +9,17 @@ class BSTNode {
     this.value = value
   }
 
+  clone() {
+    const node = new BSTNode(this.value)
+    if (this.left) {
+      node.left = this.left.clone()
+    }
+    if (this.right) {
+      node.right = this.right.clone()
+    }
+    return node
+  }
+
   push(value: number) {
     if (value < this.value) {
       if (this.left) {
@@ -38,8 +49,8 @@ class BSTNode {
     return false
   }
 
-  findLargestFromLeft(): BSTNode {
-    return this.left ? this.left.findLargestFromLeft() : this
+  findLargest(): BSTNode {
+    return this.right ? this.right.findLargest() : this
   }
 
   delete(value: number) {
@@ -58,8 +69,10 @@ class BSTNode {
           return
         }
         if (this.left.left && this.left.right) {
-          const replacing = this.left.right
-          this.left = this.left.findLargestFromLeft()
+          const oldLeft = this.left.left.clone()
+          const replacing = this.left.right.clone()
+          this.left = this.left.left.findLargest()
+          this.left.left = oldLeft
           this.left.right = replacing
           return
         }
@@ -82,8 +95,10 @@ class BSTNode {
           return
         }
         if (this.right.left && this.right.right) {
-          const replacing = this.right.right
-          this.right = this.right.findLargestFromLeft()
+          const oldLeft = this.right.left.clone()
+          const replacing = this.right.right.clone()
+          this.right = this.right.left.findLargest()
+          this.right.left = oldLeft
           this.right.right = replacing
           return
         }
