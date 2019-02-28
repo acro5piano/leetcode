@@ -55,7 +55,7 @@ function getCombinationSumUp(
   if (depthFirst) {
     return depthFirst
   }
-  return getCombinationSumUp(target, inputs, index + 1, nextRes, depth + 1)
+  return getCombinationSumUp(target, inputs, index + 1, nextRes, depth + 1) // width-first
 }
 
 console.log(getCombinationSumUpMain(10, [3, 6])) // => false
