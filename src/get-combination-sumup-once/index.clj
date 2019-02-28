@@ -5,11 +5,11 @@
     (defn put-and-false [key value]
         (def memo (assoc memo key value))
         false)
-
     (defn filter-func [input]
         (def the-key (keyword (str input)))
         (when-not (the-key memo) (def memo (assoc memo the-key input)))
         (the-key memo))
+
     (def value (first (filter filter-func inputs)))
     [value (- target value)])
 
