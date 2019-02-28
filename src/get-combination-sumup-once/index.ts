@@ -1,17 +1,14 @@
-export type Answer = number[] | false
-
 function getCombinationSumUpNoTwice(target: number, inputs: number[]): Answer {
   const memo = new Set<number>()
 
-  for (const value of inputs) {
-    const pairCandidate = target - value
-    if (memo.has(pairCandidate)) {
-      return [value, pairCandidate]
+  const value = inputs.find(value => {
+    if (memo.has(target - value)) {
+      return true
     }
     memo.add(value)
-  }
-
-  return false
+    return false
+  })
+  return value ? [value, target - value] : false
 }
 
 console.log(getCombinationSumUpNoTwice(10, [1, 5, 8, 9])) // => [1, 9]
