@@ -16,3 +16,13 @@ export const example = [
   { value: 3, weight: 1 },
   { value: 85, weight: 5 },
 ]
+
+export function range(length: number) {
+  return Array(length)
+    .fill(0)
+    .map((_, i) => i)
+}
+
+export function matrix(x: number, y: number) {
+  return Array(y).fill(Array(x))
+}

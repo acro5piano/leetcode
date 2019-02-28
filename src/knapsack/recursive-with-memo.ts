@@ -1,6 +1,6 @@
 import { Item, bigExample, example } from './utils'
 
-const dpMemo = new Map<string, number>()
+const dpMemo: number[][] = Array(1000).fill([])
 
 function knapsackRecursiveWithMemo(
   knapsackCapacity: number,
@@ -19,10 +19,10 @@ function knapsackRecursiveWithMemo(
       currentCapacity - currentItem.weight,
     ) + currentItem.value
 
-  const key = JSON.stringify({ itemIndex, currentCapacity })
-  if (dpMemo.has(key)) {
-    // console.log(key)
-    return dpMemo.get(key) as number
+  const remembered = dpMemo[itemIndex] && dpMemo[itemIndex][currentCapacity]
+  if (remembered) {
+    // console.log(remembered)
+    return remembered as number
   }
 
   if (itemIndex === items.length) {
@@ -32,7 +32,8 @@ function knapsackRecursiveWithMemo(
     return next()
   }
   const res = Math.max(next(), includeCurrentAndNext())
-  dpMemo.set(key, res)
+  dpMemo[itemIndex][currentCapacity] = res
+
   return res
 }
 
