@@ -63,4 +63,5 @@ console.log(getCombinationSumUpMain(11, [3, 2])) // => { 2: 1, 3: 3 }
 console.log(getCombinationSumUpMain(11, [2, 3])) // => { 2: 1, 3: 3 }
 console.log(getCombinationSumUpMain(29, [9, 12, 5])) // => { 5: 1, 12: 2 }
 console.log(getCombinationSumUpMain(17, [3, 4])) // => { 3: 3, 4: 2 }
+console.log(getCombinationSumUpMain(7, [2, 3, 5])) // => { 2: 2, 3: 1 }
 console.log(getCombinationSumUpMain(201017, [82, 53, 91, 295, 24])) // => { 3: 3, 4: 2 }
