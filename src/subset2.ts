@@ -6,6 +6,8 @@ function getSets(set: number[]): number[][] {
   return set.map(n => set.filter(x => x !== n))
 }
 
+const subsetMemo = new Map<string, number[][]>()
+
 /*
  * input: [1,2]
  * output: [[1,2], [1], [2]]
@@ -16,6 +18,11 @@ function getSets(set: number[]): number[][] {
  *   -> [[1,2,3,], ...[[1], [2]], //]
  */
 function getSetsRecursive(set: number[]): number[][] {
+  const key = JSON.stringify(set)
+  const cached = subsetMemo.get(key)
+  if (cached) {
+    return cached
+  }
   const children: number[][] = []
   const newSet = getSets(set)
   newSet.forEach(s => {
@@ -25,7 +32,9 @@ function getSetsRecursive(set: number[]): number[][] {
       }
     })
   })
-  return [...children, ...newSet]
+  const res = [...children, ...newSet]
+  subsetMemo.set(key, res)
+  return res
 }
 
 function arrayEqual(array1: number[], array2: number[]): boolean {
@@ -72,3 +81,10 @@ console.log(subsetsOfSet([1, 2, 3]))
 
 console.log('\n--- case [1,2,3,4] ---')
 console.log(subsetsOfSet([1, 2, 3, 4]))
+
+console.log('\n--- case BIG ---')
+subsetsOfSet(
+  Array(13)
+    .fill(0)
+    .map((_, i) => i),
+)
